@@ -1587,11 +1587,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kanaLibrary: {fileID: 11400000, guid: b92b011c390510140a8255ae79056463, type: 2}
+  recencyBuffer: 10
+  correctCount: 3
   symbolDisplay: {fileID: 1297895949}
   correctAnswer: {fileID: 113847602}
   inputField: {fileID: 1062270583}
   submitButton: {fileID: 321210576}
-  eventSystem: {fileID: 1813931998}
   correctPrompt: {fileID: 1688354203}
   wrongPrompt: {fileID: 1257959602}
 --- !u!114 &1662491044

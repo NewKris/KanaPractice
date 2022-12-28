@@ -11,27 +11,37 @@ namespace VD.Quiz
     public class QuizController : MonoBehaviour
     {
 
-        public static event Action<bool> OnAnswered;
+        // In case the stars align and the loop becomes infinite
+        private const int MaxLoopCount = 100;
         
         public KanaLibrary kanaLibrary;
+        [Tooltip("How many questions to wait before the same question can be asked")]
+        public int recencyBuffer;
+        [Tooltip("How many times the player must answer correctly in a row before the question is removed")]
+        public int correctCount;
 
         [Header("UI")]
         public TextMeshProUGUI symbolDisplay;
         public TextMeshProUGUI correctAnswer;
         public TMP_InputField inputField;
         public Button submitButton;
-        public EventSystem eventSystem;
         
         [Header("Prompts")]
         public GameObject correctPrompt;
         public GameObject wrongPrompt;
 
+        private int _currentKana;
+        private int[] _points;
         private Queue<int> _recentKana;
-        private Kana _currentKana;
+        private List<int> _learnedKana;
         
         private void Start()
         {
+            _points = new int[kanaLibrary.Count];
+            
             _recentKana = new Queue<int>();
+            _learnedKana = new List<int>();
+            
             LoadNextKana();
         }
 
@@ -45,18 +55,20 @@ namespace VD.Quiz
         {
             int rand = UnityEngine.Random.Range(0, kanaLibrary.Count - 1);
 
-            if (_recentKana.Count != 0)
+            int i = 0;
+            while (_recentKana.Contains(rand) || _learnedKana.Contains(rand) || i >= MaxLoopCount)
             {
-                while (_recentKana.Contains(rand))
-                    rand = UnityEngine.Random.Range(0, kanaLibrary.Count - 1);   
-                
-                _recentKana.Dequeue();
+                rand = UnityEngine.Random.Range(0, kanaLibrary.Count - 1);
+                i++;
             }
 
             _recentKana.Enqueue(rand);
 
-            _currentKana = kanaLibrary[rand];
-            ShowKana(_currentKana.symbol);
+            if (_recentKana.Count > recencyBuffer)
+                _recentKana.Dequeue();
+
+            _currentKana = rand;
+            ShowKana(kanaLibrary[rand].symbol);
         }
 
         private void ShowKana(in string symbol)
@@ -68,7 +80,6 @@ namespace VD.Quiz
             correctPrompt.SetActive(false);
             wrongPrompt.SetActive(false);
             
-            //eventSystem.SetSelectedGameObject(inputField.gameObject);
             submitButton.interactable = true;
             inputField.interactable = true;
             inputField.Select();
@@ -81,13 +92,16 @@ namespace VD.Quiz
             submitButton.interactable = false;
             inputField.interactable = false;
 
-            bool correct = string.Equals(inputField.text.Trim(), _currentKana.answer, StringComparison.CurrentCultureIgnoreCase);
+            bool correct = string.Equals(inputField.text.Trim(), kanaLibrary[_currentKana].answer, StringComparison.CurrentCultureIgnoreCase);
             
             correctPrompt.SetActive(correct);
             wrongPrompt.SetActive(!correct);
-            correctAnswer.text = _currentKana.answer;
-            
-            OnAnswered?.Invoke(correct);
+            correctAnswer.text = kanaLibrary[_currentKana].answer;
+
+            _points[_currentKana] = correct ? (_points[_currentKana] + 1) : 0;
+            if(_points[_currentKana] >= correctCount)
+                _learnedKana.Add(_currentKana);
+
             StartCoroutine(WaitAfterAnswer());
         }
 
