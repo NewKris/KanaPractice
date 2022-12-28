@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f2e892c36b414c846379df1687dc32, type: 3}
+  m_Name: Hiragana
+  m_EditorClassIdentifier: 
+  kana:
+  - symbol: "\u3042"
+    answer: a
+  - symbol: "\u3044"
+    answer: i
+  - symbol: "\u3046"
+    answer: u
+  - symbol: "\u3048"
+    answer: e
+  - symbol: "\u304A"
+    answer: o
+  - symbol: "\u304B"
+    answer: ka
+  - symbol: "\u304D"
+    answer: ki
+  - symbol: "\u304F"
+    answer: ku
+  - symbol: "\u3051"
+    answer: ke
+  - symbol: "\u3053"
+    answer: ko
+  - symbol: "\u3055"
+    answer: sa
+  - symbol: "\u3057"
+    answer: shi
+  - symbol: "\u3059"
+    answer: su
+  - symbol: "\u305B"
+    answer: se
+  - symbol: "\u305D"
+    answer: so
+  - symbol: "\u305F"
+    answer: ta
+  - symbol: "\u3061"
+    answer: chi
+  - symbol: "\u3064"
+    answer: tsu
+  - symbol: "\u3066"
+    answer: te
+  - symbol: "\u3068"
+    answer: to
+  - symbol: "\u306A"
+    answer: na
+  - symbol: "\u306B"
+    answer: ni
+  - symbol: "\u306C"
+    answer: nu
+  - symbol: "\u306D"
+    answer: ne
+  - symbol: "\u306E"
+    answer: no
+  - symbol: "\u306F"
+    answer: ha
+  - symbol: "\u3072"
+    answer: hi
+  - symbol: "\u3075"
+    answer: fu
+  - symbol: "\u3078"
+    answer: he
+  - symbol: "\u307B"
+    answer: ho
+  - symbol: "\u307E"
+    answer: ma
+  - symbol: "\u307F"
+    answer: mi
+  - symbol: "\u3080"
+    answer: mu
+  - symbol: "\u3081"
+    answer: me
+  - symbol: "\u3082"
+    answer: mo
+  - symbol: "\u3084"
+    answer: ya
+  - symbol: "\u3086"
+    answer: yu
+  - symbol: "\u3088"
+    answer: yo
+  - symbol: "\u3089"
+    answer: ra
+  - symbol: "\u308A"
+    answer: ri
+  - symbol: "\u308B"
+    answer: ru
+  - symbol: "\u308C"
+    answer: re
+  - symbol: "\u308D"
+    answer: ro
+  - symbol: "\u308F"
+    answer: wa
+  - symbol: "\u3090"
+    answer: wi
+  - symbol: "\u3091"
+    answer: we
+  - symbol: "\u3092"
+    answer: o
+  - symbol: "\u3093"
+    answer: n
